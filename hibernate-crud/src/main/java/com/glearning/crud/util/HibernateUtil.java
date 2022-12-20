@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.glearning.crud.model.Teacher;
+import com.glearning.crud.model.TeacherDetails;
 
 public class HibernateUtil {
 
@@ -16,6 +17,7 @@ public class HibernateUtil {
 			sessionFactory = new Configuration()
 									.configure("hibernate-cfg.xml")
 									.addAnnotatedClass(Teacher.class)
+									.addAnnotatedClass(TeacherDetails.class)
 									.buildSessionFactory();
 		}
 		

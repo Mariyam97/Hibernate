@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.glearning.crud.model.Teacher;
+import com.glearning.crud.model.TeacherDetails;
 import com.glearning.crud.util.HibernateUtil;
 
 
@@ -22,10 +23,11 @@ public class TeacherService {
 	}
 	
 	
-	public Teacher insertTeacherRecord(Teacher teacher) {
+	public Teacher insertTeacherRecord(Teacher teacher, TeacherDetails teacherDetails) {
 		try {
 			session = sessionFactory.openSession();
 			Transaction transaction = session.beginTransaction();
+			teacher.addTeacherDetails(teacherDetails);
 			Long result =(Long)session.save(teacher);
 			
 			System.out.println("The primary key of the stored teacher instance: "+ result);
@@ -90,6 +92,7 @@ Teacher teacher = null;
 		
 		return teacher;
 	}
+
 	
 	public  void deleteTeacherRecordByTeacherId(long teacherId){
 Teacher teacher = null;
@@ -113,5 +116,7 @@ Teacher teacher = null;
 		}
 		
 	}
+	
+	
 	
 }

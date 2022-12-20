@@ -1,10 +1,13 @@
 package com.glearning.crud.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -27,7 +30,9 @@ private long id;
 	private String emailAddress;
 
 
-
+@OneToOne(mappedBy = "teacher", cascade = CascadeType.ALL)
+@PrimaryKeyJoinColumn
+private TeacherDetails teacherDetails;
 
 
 
@@ -75,6 +80,25 @@ public String getEmailAddress() {
 public void setEmailAddress(String emailAddress) {
 	this.emailAddress = emailAddress;
 }
+
+public TeacherDetails getTeacherDetails() {
+	return teacherDetails;
+}
+
+public void setTeacherDetails(TeacherDetails teacherDetails) {
+	this.teacherDetails = teacherDetails;
+}
+
+
+
+//scaffolding code
+
+public void addTeacherDetails(TeacherDetails teacherDetails) {
+	this.teacherDetails = teacherDetails;
+	 teacherDetails.setTeacher(this);
+}
+
+
 
 @Override
 public String toString() {

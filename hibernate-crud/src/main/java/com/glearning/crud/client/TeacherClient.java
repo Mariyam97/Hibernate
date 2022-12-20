@@ -2,9 +2,11 @@ package com.glearning.crud.client;
 
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.glearning.crud.model.Teacher;
+import com.glearning.crud.model.TeacherDetails;
 import com.glearning.crud.service.TeacherService;
 
 public class TeacherClient {
@@ -29,7 +31,7 @@ private final TeacherService teacherService;
 		client.insertTeacher();
 		//fetch all the teachers
 		
-		client.fetchTeacher();
+	client.fetchTeacher();
 		
 		//fetch teacher by teacher Id
 		
@@ -37,17 +39,20 @@ private final TeacherService teacherService;
 		
 		//delete the  teacher  record from the DB based on Id
 		
-				client.deleteTeacherByTeacherId(1);
+			client.deleteTeacherByTeacherId(1);
 	
 		
 
 }
+	
 
 	private void deleteTeacherByTeacherId(long id) {
 		// TODO Auto-generated method stub
 		this.teacherService.deleteTeacherRecordByTeacherId(id);
 	}
 
+	
+	
 	private void fetchTeacherByTeacherId(long teacherId) {
 		// TODO Auto-generated method stub
 		Teacher teacher = this.teacherService.findTeacherByTeacherId(teacherId);
@@ -55,6 +60,7 @@ private final TeacherService teacherService;
 		System.out.println("Fetched the teacher by teacher id");
 		System.out.println(teacher);
 	}
+
 
 	private void fetchTeacher() {
 		// TODO Auto-generated method stub
@@ -65,13 +71,25 @@ private final TeacherService teacherService;
 
 	}
 
+
+
+
 	private void insertTeacher() {
 		// TODO Auto-generated method stub
-		Teacher mariyam = new Teacher("mariyam",12399,"mari@com");
-		Teacher queen = new Teacher("queen",1299,"que@com");
+		//Teacher mariyam = new Teacher("mariyam",12399,"mari@com");
+		//Teacher queen = new Teacher("queen",1299,"que@com");
+	//	teacherService.insertTeacherRecord(mariyam);
+	//	teacherService.insertTeacherRecord(queen);
 		
-		teacherService.insertTeacherRecord(mariyam);
-		teacherService.insertTeacherRecord(queen);
+		//one to one mapping
+		Teacher mariyam = new Teacher("mariya",12323,"mari@com");
+		TeacherDetails teacherDetails = new TeacherDetails("123-456-789",LocalDate.now(),"Bangalore");
+		teacherService.insertTeacherRecord(mariyam, teacherDetails);
+		
+		
+		Teacher queen = new Teacher("queen",12939,"que@com");
+		TeacherDetails queenteacherDetails = new TeacherDetails("786-123-456",LocalDate.now(),"Delhi");
+		teacherService.insertTeacherRecord(queen, teacherDetails);
 	}
 	
 }
